@@ -46,10 +46,3 @@ jobs:
           title: "Happy API Windows 自动构建最新版本"
           files: |
             happy-api.exe
-      - name: automatic releases
-        uses: marvinpinto/action-automatic-releases@v1.2.1
-        with:
-          repo_token: "${{ secrets.GITHUB_TOKEN }}"
-          prerelease: false
-          files: |
-            happy-api.exe

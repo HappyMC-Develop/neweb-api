@@ -34,11 +34,3 @@ jobs:
         run: |
           go mod download
           go build -ldflags "-X 'happy-api/common.Version=$(git describe --tags)'" -o happy-api-macos
-      - name: automatic releases
-        uses: marvinpinto/action-automatic-releases@v1.2.1
-        with:
-          repo_token: "${{ secrets.GITHUB_TOKEN }}"
-          prerelease: false
-          files: |
-            happy-api
-            happy-api-macos
