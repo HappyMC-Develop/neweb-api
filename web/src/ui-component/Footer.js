@@ -24,12 +24,12 @@ const Footer = () => {
             </Link>{' '}
             构建，
             <Link href="https://github.com/MartialBE" target="_blank">
-              MartialBE
+              MartialBE & Happy-clo
             </Link>
             修改，源代码遵循
             <Link href="https://opensource.org/licenses/mit-license.php"> MIT 协议</Link>
           </>
-        )}
+        )}	
       </Box>
     </Container>
   );

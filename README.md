@@ -10,7 +10,7 @@
 
 # One API
 
-_本项目是基于[one-api](https://github.com/songquanpeng/one-api)二次开发而来的，主要将原项目中的模块代码分离，模块化，并修改了前端界面。本项目同样遵循 MIT 协议。_
+_本项目是基于[one-api](https://github.com/MartialBE/one-api)二次开发而来的，主要将原项目中的项目名称修改为 Happy API，并修改了前端界面。本项目同样遵循 MIT 协议。_
 
 <p align="center">
   <a href="https://raw.githubusercontent.com/MartialBE/one-api/main/LICENSE">
@@ -26,8 +26,6 @@ _本项目是基于[one-api](https://github.com/songquanpeng/one-api)二次开�
     <img src="https://goreportcard.com/badge/github.com/MartialBE/one-api" alt="GoReportCard">
   </a>
 </p>
-
-**请不要和原版混用，因为 channel id 不同的原因，会导致数据错乱**
 
 # 截图展示
 

@@ -101,11 +101,11 @@ const OtherSetting = () => {
   };
 
   const openGitHubRelease = () => {
-    window.location = 'https://github.com/MartialBE/one-api/releases/latest';
+    window.location = 'https://github.com/HappyMC-Develop/neweb-api/releases/latest';
   };
 
   const checkUpdate = async () => {
-    const res = await API.get('https://api.github.com/repos/MartialBE/one-api/releases/latest');
+    const res = await API.get('https://api.github.com/repos/HappyMC-Develop/neweb-api/releases/latest');
     const { tag_name, body } = res.data;
     if (tag_name === process.env.REACT_APP_VERSION) {
       showSuccess(`已是最新版本：${tag_name}`);
@@ -232,7 +232,7 @@ const OtherSetting = () => {
             </Grid>
             <Grid xs={12}>
               <Alert severity="warning">
-                移除 One API 的版权标识必须首先获得授权，项目维护需要花费大量精力，如果本项目对你有意义，请主动支持本项目。
+                移除 Happy API 的版权标识必须首先获得授权，项目维护需要花费大量精力，如果本项目对你有意义，请主动支持本项目。
               </Alert>
             </Grid>
             <Grid xs={12}>

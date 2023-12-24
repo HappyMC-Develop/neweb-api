@@ -5,8 +5,7 @@ permissions:
 on:
   push:
     tags:
-      - "*"
-      - "!*-alpha*"
+      - v*
 jobs:
   release:
     runs-on: windows-latest
@@ -18,7 +17,7 @@ jobs:
         uses: actions/checkout@v3
         with:
           fetch-depth: 0
-      - uses: actions/setup-node@v3
+      - uses: actions/setup-node@v4
         with:
           node-version: 16
       - name: Build Frontend
@@ -36,13 +35,21 @@ jobs:
       - name: Build Backend
         run: |
           go mod download
-          go build -ldflags "-s -w -X 'one-api/common.Version=$(git describe --tags)'" -o one-api.exe
-      - name: Release
-        uses: softprops/action-gh-release@v1
-        if: startsWith(github.ref, 'refs/tags/')
+          go build -ldflags "-s -w -X 'happy-api/common.Version=$(git describe --tags)'" -o happy-api.exe
+
+      - name: automatic releases
+        uses: marvinpinto/action-automatic-releases@v1.2.1
         with:
-          files: one-api.exe
-          draft: true
-          generate_release_notes: true
-        env:
-          GITHUB_TOKEN: ${{ secrets.GT_Token }}
+          repo_token: "${{ secrets.GITHUB_TOKEN }}"
+          automatic_release_tag: "windows-latest"
+          prerelease: false
+          title: "Happy API Windows 自动构建最新版本"
+          files: |
+            happy-api.exe
+      - name: automatic releases
+        uses: marvinpinto/action-automatic-releases@v1.2.1
+        with:
+          repo_token: "${{ secrets.GITHUB_TOKEN }}"
+          prerelease: false
+          files: |
+            happy-api.exe
