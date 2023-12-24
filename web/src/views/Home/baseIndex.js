@@ -1,6 +1,5 @@
-import { Box, Typography, Button, Container, Stack } from '@mui/material';
+import { Box, Typography, Container, Stack } from '@mui/material';
 import Grid from '@mui/material/Unstable_Grid2';
-import { GitHub } from '@mui/icons-material';
 
 const BaseIndex = () => (
   <Box
