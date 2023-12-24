@@ -168,7 +168,7 @@ const OperationSetting = () => {
                 value={inputs.TopUpLink}
                 onChange={handleInputChange}
                 label="充值链接"
-                placeholder="例如发卡网站的购买链接"
+                placeholder="发卡网站的购买链接"
                 disabled={loading}
               />
             </FormControl>

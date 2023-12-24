@@ -27,12 +27,10 @@ import { IconDotsVertical, IconEdit, IconTrash, IconCaretDownFilled } from '@tab
 const COPY_OPTIONS = [
   {
     key: 'next',
-    text: 'ChatGPT Next',
-    url: 'https://chat.oneapi.pro/#/?settings={"key":"sk-{key}","url":"{serverAddress}"}',
+    text: 'ChatWeb',
+    url: 'https://share.happya.top/#/?settings={"key":"sk-{key}","url":"{serverAddress}"}',
     encode: false
-  },
-  { key: 'ama', text: 'AMA 问天', url: 'ama://set-api-key?server={serverAddress}&key=sk-{key}', encode: true },
-  { key: 'opencat', text: 'OpenCat', url: 'opencat://team/join?domain={serverAddress}&token=sk-{key}', encode: true }
+  }
 ];
 
 function replacePlaceholders(text, key, serverAddress) {

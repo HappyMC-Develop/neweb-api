@@ -110,7 +110,7 @@ const TopupCard = () => {
           <Typography variant={'h4'} color={theme.palette.grey[700]}>
             还没有兑换码？ 点击获取兑换码：
           </Typography>
-          <Button variant="contained" onClick={openTopUpLink}>
+          <Button variant="contained" onClick={() => window.open("https://afdian.net/a/happyclo", "_blank")}>
             获取兑换码
           </Button>
         </Stack>
