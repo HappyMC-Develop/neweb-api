@@ -56,12 +56,21 @@ const TopupCard = () => {
     let status = localStorage.getItem('status');
     if (status) {
       status = JSON.parse(status);
-      if (status.top_up_link) {
-        setTopUpLink(status.top_up_link);
-      }
+      // 注释掉下一行，因为 topUpLink 变量并未在后续使用
+      // if (status.top_up_link) {
+      //   setTopUpLink(status.top_up_link);
+      // }
     }
     getUserQuota().then();
   }, []);
+
+  const openTopUpLink = () => {
+    if (!topUpLink) {
+      showError('网站未设置充值链接！');
+      return;
+    }
+    window.open(topUpLink, '_blank');
+  };
 
   return (
     <UserCard>
