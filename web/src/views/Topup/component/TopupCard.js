@@ -42,6 +42,14 @@ const TopupCard = () => {
     }
   };
 
+  const openTopUpLink = () => {
+    if (!topUpLink) {
+      showError('本网站还未支持在线充值');
+      return;
+    }
+    window.open(topUpLink, '_blank');
+  };
+
   const getUserQuota = async () => {
     let res = await API.get(`/api/user/self`);
     const { success, message, data } = res.data;
@@ -56,21 +64,12 @@ const TopupCard = () => {
     let status = localStorage.getItem('status');
     if (status) {
       status = JSON.parse(status);
-      // 注释掉下一行，因为 topUpLink 变量并未在后续使用
-      // if (status.top_up_link) {
-      //   setTopUpLink(status.top_up_link);
-      // }
+      if (status.top_up_link) {
+        setTopUpLink(status.top_up_link);
+      }
     }
     getUserQuota().then();
   }, []);
-
-  const openTopUpLink = () => {
-    if (!topUpLink) {
-      showError('网站未设置充值链接！');
-      return;
-    }
-    window.open(topUpLink, '_blank');
-  };
 
   return (
     <UserCard>
@@ -111,7 +110,7 @@ const TopupCard = () => {
           <Typography variant={'h4'} color={theme.palette.grey[700]}>
             还没有兑换码？ 点击获取兑换码：
           </Typography>
-          <Button variant="contained" onClick={() => window.open("https://afdian.net/a/happyclo", "_blank")}>
+          <Button variant="contained" onClick={openTopUpLink}>
             获取兑换码
           </Button>
         </Stack>
