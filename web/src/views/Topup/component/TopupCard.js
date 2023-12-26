@@ -42,14 +42,6 @@ const TopupCard = () => {
     }
   };
 
-  const openTopUpLink = () => {
-    if (!topUpLink) {
-      showError('超级管理员未设置充值链接！');
-      return;
-    }
-    window.open(topUpLink, '_blank');
-  };
-
   const getUserQuota = async () => {
     let res = await API.get(`/api/user/self`);
     const { success, message, data } = res.data;
