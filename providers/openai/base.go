@@ -59,7 +59,7 @@ func (p *OpenAIProvider) GetFullRequestURL(requestURL string, modelName string) 
 	baseURL := strings.TrimSuffix(p.GetBaseURL(), "/")
 
 	if p.IsAzure {
-		apiVersion := p.Context.GetString("api_version")
+		apiVersion := p.Channel.Other
 		if modelName == "dall-e-2" {
 			// 因为dall-e-3需要api-version=2023-12-01-preview，但是该版本
 			// 已经没有dall-e-2了，所以暂时写死
@@ -85,9 +85,9 @@ func (p *OpenAIProvider) GetRequestHeaders() (headers map[string]string) {
 	headers = make(map[string]string)
 	p.CommonRequestHeaders(headers)
 	if p.IsAzure {
-		headers["api-key"] = p.Context.GetString("api_key")
+		headers["api-key"] = p.Channel.Key
 	} else {
-		headers["Authorization"] = fmt.Sprintf("Bearer %s", p.Context.GetString("api_key"))
+		headers["Authorization"] = fmt.Sprintf("Bearer %s", p.Channel.Key)
 	}
 
 	return headers
@@ -111,10 +111,12 @@ func (p *OpenAIProvider) GetRequestBody(request any, isModelMapped bool) (reques
 func (p *OpenAIProvider) sendStreamRequest(req *http.Request, response OpenAIProviderStreamResponseHandler) (openAIErrorWithStatusCode *types.OpenAIErrorWithStatusCode, responseText string) {
 	defer req.Body.Close()
 
-	resp, err := common.HttpClient.Do(req)
+	client := common.GetHttpClient(p.Channel.Proxy)
+	resp, err := client.Do(req)
 	if err != nil {
 		return common.ErrorWrapper(err, "http_request_failed", http.StatusInternalServerError), ""
 	}
+	common.PutHttpClient(client)
 
 	if common.IsFailureStatusCode(resp) {
 		return common.HandleErrorResp(resp), ""

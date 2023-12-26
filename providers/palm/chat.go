@@ -43,6 +43,7 @@ func (palmResponse *PaLMChatResponse) ResponseHandler(resp *http.Response) (Open
 	palmResponse.Usage.TotalTokens = palmResponse.Usage.PromptTokens + completionTokens
 
 	fullTextResponse.Usage = palmResponse.Usage
+	fullTextResponse.Model = palmResponse.Model
 
 	return fullTextResponse, nil
 }
@@ -133,10 +134,12 @@ func (p *PalmProvider) sendStreamRequest(req *http.Request) (*types.OpenAIErrorW
 	defer req.Body.Close()
 
 	// 发送请求
-	resp, err := common.HttpClient.Do(req)
+	client := common.GetHttpClient(p.Channel.Proxy)
+	resp, err := client.Do(req)
 	if err != nil {
 		return common.ErrorWrapper(err, "http_request_failed", http.StatusInternalServerError), ""
 	}
+	common.PutHttpClient(client)
 
 	if common.IsFailureStatusCode(resp) {
 		return common.HandleErrorResp(resp), ""

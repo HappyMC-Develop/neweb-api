@@ -63,7 +63,7 @@ func (p *BaiduProvider) GetRequestHeaders() (headers map[string]string) {
 }
 
 func (p *BaiduProvider) getBaiduAccessToken() (string, error) {
-	apiKey := p.Context.GetString("api_key")
+	apiKey := p.Channel.Key
 	if val, ok := baiduTokenStore.Load(apiKey); ok {
 		var accessToken BaiduAccessToken
 		if accessToken, ok = val.(BaiduAccessToken); ok {
@@ -105,10 +105,12 @@ func (p *BaiduProvider) getBaiduAccessTokenHelper(apiKey string) (*BaiduAccessTo
 		return nil, err
 	}
 
-	resp, err := common.HttpClient.Do(req)
+	httpClient := common.GetHttpClient(p.Channel.Proxy)
+	resp, err := httpClient.Do(req)
 	if err != nil {
 		return nil, err
 	}
+	common.PutHttpClient(httpClient)
 
 	defer resp.Body.Close()
 
