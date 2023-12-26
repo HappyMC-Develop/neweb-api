@@ -6,6 +6,7 @@ import (
 	"io"
 	"net/http"
 	"one-api/common"
+	"one-api/model"
 	"one-api/types"
 	"strings"
 
@@ -28,15 +29,20 @@ type BaseProvider struct {
 	ImagesVariations    string
 	Proxy               string
 	Context             *gin.Context
+	Channel             *model.Channel
 }
 
 // 获取基础URL
 func (p *BaseProvider) GetBaseURL() string {
-	if p.Context.GetString("base_url") != "" {
-		return p.Context.GetString("base_url")
+	if p.Channel.GetBaseURL() != "" {
+		return p.Channel.GetBaseURL()
 	}
 
 	return p.BaseURL
+}
+
+func (p *BaseProvider) SetChannel(channel *model.Channel) {
+	p.Channel = channel
 }
 
 // 获取完整请求URL
@@ -59,7 +65,7 @@ func (p *BaseProvider) CommonRequestHeaders(headers map[string]string) {
 func (p *BaseProvider) SendRequest(req *http.Request, response ProviderResponseHandler, rawOutput bool) (openAIErrorWithStatusCode *types.OpenAIErrorWithStatusCode) {
 	defer req.Body.Close()
 
-	resp, openAIErrorWithStatusCode := common.SendRequest(req, response, true)
+	resp, openAIErrorWithStatusCode := common.SendRequest(req, response, true, p.Channel.Proxy)
 	if openAIErrorWithStatusCode != nil {
 		return
 	}
@@ -102,10 +108,12 @@ func (p *BaseProvider) SendRequestRaw(req *http.Request) (openAIErrorWithStatusC
 	defer req.Body.Close()
 
 	// 发送请求
-	resp, err := common.HttpClient.Do(req)
+	client := common.GetHttpClient(p.Channel.Proxy)
+	resp, err := client.Do(req)
 	if err != nil {
 		return common.ErrorWrapper(err, "http_request_failed", http.StatusInternalServerError)
 	}
+	common.PutHttpClient(client)
 
 	defer resp.Body.Close()
 
