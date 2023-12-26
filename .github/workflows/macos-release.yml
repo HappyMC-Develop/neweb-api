@@ -34,3 +34,21 @@ jobs:
         run: |
           go mod download
           go build -ldflags "-X 'happy-api/common.Version=$(git describe --tags)'" -o happy-api-macos
+      - name: Release
+        uses: softprops/action-gh-release@v1
+        if: startsWith(github.ref, 'refs/tags/')
+        with:
+          files: happy-api-macos
+          draft: true
+          generate_release_notes: true
+        env:
+          GITHUB_TOKEN: ${{ secrets.GT_Token }}
+      - name: automatic releases
+        uses: marvinpinto/action-automatic-releases@v1.2.1
+        with:
+          repo_token: "${{ secrets.GITHUB_TOKEN }}"
+          automatic_release_tag: "windows-latest"
+          prerelease: false
+          title: "Happy API MacOS 自动构建最新版本"
+          files: |
+            happy-api-macos

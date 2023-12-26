@@ -51,3 +51,15 @@ jobs:
           files: |
             happy-api
             happy-api-arm64
+
+      - name: Release
+        uses: softprops/action-gh-release@v1
+        if: startsWith(github.ref, 'refs/tags/')
+        with:
+          files: |
+            happy-api
+            happy-api-arm64
+          draft: true
+          generate_release_notes: true
+        env:
+          GITHUB_TOKEN: ${{ secrets.GT_Token }}

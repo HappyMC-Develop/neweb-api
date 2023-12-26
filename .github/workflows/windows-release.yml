@@ -47,3 +47,12 @@ jobs:
           title: "Happy API Windows 自动构建最新版本"
           files: |
             happy-api.exe
+      - name: Release
+        uses: softprops/action-gh-release@v1
+        if: startsWith(github.ref, 'refs/tags/')
+        with:
+          files: happy-api.exe
+          draft: true
+          generate_release_notes: true
+        env:
+          GITHUB_TOKEN: ${{ secrets.GT_Token }}
