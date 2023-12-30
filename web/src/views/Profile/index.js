@@ -128,9 +128,6 @@ export default function Profile() {
         <Card sx={{ paddingTop: '20px' }}>
           <Stack spacing={2}>
             <Stack direction="row" alignItems="center" justifyContent="center" spacing={2} sx={{ paddingBottom: '20px' }}>
-              <Label variant="ghost" color={inputs.wechat_id ? 'primary' : 'default'}>
-                <IconBrandWechat /> {inputs.wechat_id || '未绑定'}
-              </Label>
               <Label variant="ghost" color={inputs.github_id ? 'primary' : 'default'}>
                 <IconBrandGithub /> {inputs.github_id || '未绑定'}
               </Label>
