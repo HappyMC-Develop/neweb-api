@@ -70,7 +70,7 @@ const RegisterForm = ({ ...others }) => {
       return;
     }
     if (turnstileEnabled && turnstileToken === '') {
-      showError('请稍后几秒重试，Turnstile 正在检查用户环境！');
+      showError('请稍后几秒重试，服务器 正在检查用户环境！');
       return;
     }
 
@@ -116,7 +116,7 @@ const RegisterForm = ({ ...others }) => {
         })}
         onSubmit={async (values, { setErrors, setStatus, setSubmitting }) => {
           if (turnstileEnabled && turnstileToken === '') {
-            showInfo('请稍后几秒重试，Turnstile 正在检查用户环境！');
+            showInfo('请稍后几秒重试，服务器 正在检查用户环境！');
             setSubmitting(false);
             return;
           }

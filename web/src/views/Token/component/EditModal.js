@@ -60,9 +60,9 @@ const EditModal = ({ open, tokenId, onCancel, onOk }) => {
     const { success, message } = res.data;
     if (success) {
       if (values.is_edit) {
-        showSuccess('令牌更新成功！');
+        showSuccess('API Key更新成功！');
       } else {
-        showSuccess('令牌创建成功，请在列表页面点击复制获取令牌！');
+        showSuccess('API Key创建成功，请在列表页面点击复制获取API Key！');
       }
       setSubmitting(false);
       setStatus({ success: true });
@@ -93,11 +93,11 @@ const EditModal = ({ open, tokenId, onCancel, onOk }) => {
   return (
     <Dialog open={open} onClose={onCancel} fullWidth maxWidth={'md'}>
       <DialogTitle sx={{ margin: '0px', fontWeight: 700, lineHeight: '1.55556', padding: '24px', fontSize: '1.125rem' }}>
-        {tokenId ? '编辑Token' : '新建Token'}
+        {tokenId ? '编辑 API Key' : '新建 API Key'}
       </DialogTitle>
       <Divider />
       <DialogContent>
-        <Alert severity="info">注意，令牌的额度仅用于限制令牌本身的最大额度使用量，实际的使用受到账户的剩余额度限制。</Alert>
+        <Alert severity="info">注意，API Key的额度仅用于限制API Key本身的最大额度使用量，实际的使用受到账户的剩余额度限制。</Alert>
         <Formik initialValues={inputs} enableReinitialize validationSchema={validationSchema} onSubmit={submit}>
           {({ errors, handleBlur, handleChange, handleSubmit, touched, values, setFieldError, setFieldValue, isSubmitting }) => (
             <form noValidate onSubmit={handleSubmit}>

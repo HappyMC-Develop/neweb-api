@@ -245,9 +245,9 @@ export default function TokensTableRow({ item, manageToken, handleOpenModal, set
       </Popover>
 
       <Dialog open={openDelete} onClose={handleDeleteClose}>
-        <DialogTitle>删除Token</DialogTitle>
+        <DialogTitle>删除 API Key</DialogTitle>
         <DialogContent>
-          <DialogContentText>是否删除Token {item.name}？</DialogContentText>
+          <DialogContentText>是否删除 API Key {item.name}？</DialogContentText>
         </DialogContent>
         <DialogActions>
           <Button onClick={handleDeleteClose}>关闭</Button>

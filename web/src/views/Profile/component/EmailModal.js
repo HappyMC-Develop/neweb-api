@@ -70,7 +70,7 @@ const EmailModal = ({ open, handleClose, turnstileToken }) => {
       return;
     }
     if (turnstileToken === '') {
-      showError('请稍后几秒重试，Turnstile 正在检查用户环境！');
+      showError('请稍后几秒重试，服务器 正在检查用户环境！');
       return;
     }
     setLoading(true);

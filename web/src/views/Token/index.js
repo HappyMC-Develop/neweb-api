@@ -152,7 +152,7 @@ export default function Token() {
           }}
           startIcon={<IconPlus />}
         >
-          新建Token
+          新建 API Key
         </Button>
       </Stack>
       <Stack mb={5}>
@@ -162,7 +162,7 @@ export default function Token() {
       </Stack>
       <Card>
         <Box component="form" onSubmit={searchTokens} noValidate>
-          <TableToolBar filterName={searchKeyword} handleFilterName={handleSearchKeyword} placeholder={'搜索令牌的名称...'} />
+          <TableToolBar filterName={searchKeyword} handleFilterName={handleSearchKeyword} placeholder={'搜索API Key的名称...'} />
         </Box>
         <Toolbar
           sx={{
