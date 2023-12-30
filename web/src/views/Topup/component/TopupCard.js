@@ -25,13 +25,9 @@ const TopupCard = () => {
       const res = await API.post('/api/user/topup', {
         key: redemptionCode
       });
-      const { success, message, data, upgradedToVIP  } = res.data;
+      const { success, message, data } = res.data;
       if (success) {
-        if (upgradedToVIP) {  // 如果用户成功升级为 VIP
-          showSuccess('充值成功，升级为 VIP 会员！');
-        } else {
-          showSuccess('充值成功，谢谢。');
-        }
+        showSuccess('充值成功！');
         setUserQuota((quota) => {
           return quota + data;
         });
@@ -40,7 +36,7 @@ const TopupCard = () => {
         showError(message);
       }
     } catch (err) {
-      showError('失败,请右下角联系客服');
+      showError('请求失败');
     } finally {
       setIsSubmitting(false);
     }
@@ -48,7 +44,7 @@ const TopupCard = () => {
 
   const openTopUpLink = () => {
     if (!topUpLink) {
-      showError('超级管理员未设置充值链接！');
+      showError('本网站还未支持在线充值');
       return;
     }
     window.open(topUpLink, '_blank');

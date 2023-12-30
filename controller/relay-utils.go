@@ -48,8 +48,6 @@ func fetchChannel(c *gin.Context, modelName string) (channel *model.Channel, pas
 
 	c.Set("channel_id", channel.Id)
 
-	c.Set("channel_id", channel.Id)
-
 	return
 }
 
@@ -260,9 +258,7 @@ func (q *QuotaInfo) completedQuotaConsumption(usage *types.Usage, tokenName stri
 			}
 		}
 
-		inputPrice := q.ratio * 0.002
-		outputPrice := inputPrice * completionRatio
-		logContent := fmt.Sprintf("输入:$%.6g/1k tokens, 输出:$%.6g/1k tokens", inputPrice, outputPrice)
+		logContent := fmt.Sprintf("模型倍率 %.2f，分组倍率 %.2f", q.modelRatio, q.groupRatio)
 		model.RecordConsumeLog(ctx, q.userId, q.channelId, promptTokens, completionTokens, q.modelName, tokenName, quota, logContent, requestTime)
 		model.UpdateUserUsedQuotaAndRequestCount(q.userId, quota)
 		model.UpdateChannelUsedQuota(q.channelId, quota)

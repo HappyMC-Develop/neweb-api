@@ -3,15 +3,15 @@ const config = {
   // like '/berry-material-react/react/default'
   basename: '/',
   defaultPath: '/panel/dashboard',
-  fontFamily: `system-ui,-apple-system,BlinkMacSystemFont,'Helvetica Neue',Helvetica,Segoe UI,Arial,Roboto,'PingFang SC',miui,'Hiragino Sans GB','Microsoft Yahei',sans-serif`,
-  borderRadius: 8,
+  fontFamily: `'Roboto', sans-serif, Helvetica, Arial, sans-serif`,
+  borderRadius: 12,
   siteInfo: {
     chat_link: '',
     display_in_currency: true,
     email_verification: false,
     footer_html: '',
     github_client_id: '',
-    github_oauth: false,
+    github_oauth: true,
     logo: '',
     quota_per_unit: 500000,
     server_address: '',

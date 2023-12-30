@@ -101,11 +101,11 @@ const OtherSetting = () => {
   };
 
   const openGitHubRelease = () => {
-    window.location = 'https://github.com/MartialBE/one-api/releases/latest';
+    window.location = 'https://github.com/HappyMC-Develop/neweb-api/releases/latest';
   };
 
   const checkUpdate = async () => {
-    const res = await API.get('https://api.github.com/repos/MartialBE/one-api/releases/latest');
+    const res = await API.get('https://api.github.com/repos/HappyMC-Develop/neweb-api/releases/latest');
     const { tag_name, body } = res.data;
     if (tag_name === process.env.REACT_APP_VERSION) {
       showSuccess(`已是最新版本：${tag_name}`);
@@ -241,7 +241,7 @@ const OtherSetting = () => {
                   multiline
                   maxRows={15}
                   id="Footer"
-                  label="页脚"
+                  label="公告"
                   value={inputs.Footer}
                   name="Footer"
                   onChange={handleInputChange}
