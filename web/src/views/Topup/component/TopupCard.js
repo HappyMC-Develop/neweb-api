@@ -108,7 +108,7 @@ const TopupCard = () => {
 
         <Stack justifyContent="center" alignItems={'center'} spacing={3} paddingTop={'20px'}>
           <Typography variant={'h4'} color={theme.palette.grey[700]}>
-            还没有兑换码？ 点击获取兑换码：
+            点击获取兑换码
           </Typography>
           <Button variant="contained" onClick={openTopUpLink}>
             获取兑换码

@@ -59,7 +59,7 @@ const Dashboard = () => {
           <Grid item lg={4} xs={12}>
             <StatisticalLineChartCard
               isLoading={isLoading}
-              title="今日请求量"
+              title="今日 API 请求量"
               chartData={requestChart?.chartData}
               todayValue={requestChart?.todayValue}
             />
@@ -67,7 +67,7 @@ const Dashboard = () => {
           <Grid item lg={4} xs={12}>
             <StatisticalLineChartCard
               isLoading={isLoading}
-              title="今日消费"
+              title="今日 API Key 消费"
               chartData={quotaChart?.chartData}
               todayValue={quotaChart?.todayValue}
             />
@@ -75,7 +75,7 @@ const Dashboard = () => {
           <Grid item lg={4} xs={12}>
             <StatisticalLineChartCard
               isLoading={isLoading}
-              title="今日 API Key"
+              title="今日 Token 消费"
               chartData={tokenChart?.chartData}
               todayValue={tokenChart?.todayValue}
             />
