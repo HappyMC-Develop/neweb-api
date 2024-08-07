@@ -76,7 +76,7 @@ jobs:
         uses: docker/login-action@v2
         with:
           registry: docker.io
-          username: happuclo
+          username: happyclo
           password: ${{ secrets.DOCKERHUB_TOKEN }}
 
       - name: Docker meta
