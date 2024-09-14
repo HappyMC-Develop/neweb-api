@@ -70,6 +70,7 @@ func GetProvider(c *gin.Context, modeName string) (provider providersBase.Provid
 		return
 	}
 	provider.SetOriginalModel(modeName)
+	c.Set("original_model", modeName)
 
 	newModelName, fail = provider.ModelMappingHandler(modeName)
 	if fail != nil {
@@ -321,5 +322,21 @@ func relayResponseWithErr(c *gin.Context, err *types.OpenAIErrorWithStatusCode) 
 	err.OpenAIError.Message = utils.MessageWithRequestId(err.OpenAIError.Message, requestId)
 	c.JSON(err.StatusCode, gin.H{
 		"error": err.OpenAIError,
+	})
+}
+
+func relayRerankResponseWithErr(c *gin.Context, err *types.OpenAIErrorWithStatusCode) {
+	// 如果message中已经包含 request id: 则不再添加
+	if !strings.Contains(err.Message, "request id:") {
+		requestId := c.GetString(logger.RequestIdKey)
+		err.OpenAIError.Message = utils.MessageWithRequestId(err.OpenAIError.Message, requestId)
+	}
+
+	if err.OpenAIError.Type == "new_api_error" || err.OpenAIError.Type == "one_api_error" {
+		err.OpenAIError.Type = "system_error"
+	}
+
+	c.JSON(err.StatusCode, gin.H{
+		"detail": err.OpenAIError.Message,
 	})
 }

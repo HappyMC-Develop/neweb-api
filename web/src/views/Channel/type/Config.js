@@ -61,12 +61,10 @@ const typeConfig = {
   },
   8: {
     inputLabel: {
-      provider_models_list: '从渠道获取模型列表',
-      other: '替换 API 版本'
+      provider_models_list: '从渠道获取模型列表'
     },
     prompt: {
-      other:
-        '输入后，会替换请求地址中的v1，例如：freeapi，则请求chat时会变成https://xxx.com/freeapi/chat/completions,如果需要禁用版本号，请输入 disable'
+      other: ''
     }
   },
   3: {
@@ -297,7 +295,8 @@ const typeConfig = {
         'mj_custom_zoom',
         'mj_describe',
         'mj_upscale',
-        'swap_face'
+        'swap_face',
+        'mj_upload'
       ]
     },
     prompt: {
@@ -400,6 +399,28 @@ const typeConfig = {
       base_url: ''
     },
     modelGroup: 'VertexAI'
+  },
+  45: {
+    input: {
+      models: ['black-forest-labs/FLUX.1-dev', 'black-forest-labs/FLUX.1-schnell']
+    },
+    inputLabel: {
+      provider_models_list: '从Siliconflow获取模型列表'
+    },
+    prompt: {
+      base_url: '',
+      test_model: ''
+    },
+    modelGroup: 'Siliconflow'
+  },
+  47: {
+    input: {
+      models: ['jina-reranker-v2-base-multilingual']
+    },
+    prompt: {
+      test_model: ''
+    },
+    modelGroup: 'Jina'
   }
 };
 
